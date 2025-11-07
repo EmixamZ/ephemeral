@@ -1,0 +1,25 @@
+<div class="flex flex-col gap-2">
+    <h1 class="text-2xl">Join a Session</h1>
+    
+    <p>Connection State: {{connectionState() | json}}</p>
+    
+    <div class="my-5 flex flex-col gap-2">
+        <h3>Step 1: Paste the offer from the creator</h3>
+        <input type="text" [(ngModel)]="offerString" placeholder="Paste session offer here" class="input input-bordered w-full max-w-xs"/>
+        <button (click)="joinSession()" class="btn btn-primary">Join</button>
+    </div>
+    
+    @if (answer()) {
+        <div class="my-5 flex flex-col gap-2">
+            <h3>Step 2: Copy this answer and send it back to the creator</h3>
+            <p class="break-all whitespace-pre-wrap border border-primary p-2 rounded max-w-full overflow-wrap-anywhere">
+                {{answerInBase64()}}
+            </p>
+            <button class="btn btn-accent btn-outline" (click)="copyToClipboard(answerInBase64())">Copy Answer</button>
+        </div>
+        
+        @if (connectionState() === 'connected') {
+            <app-shared-editor />
+        }
+    }
+</div>

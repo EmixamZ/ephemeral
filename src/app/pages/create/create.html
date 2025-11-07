@@ -1,0 +1,30 @@
+<div class="flex flex-col gap-2">
+    <h1 class="text-2xl">Create a New Session</h1>
+
+    <p>Connection State: {{connectionState() | json}}</p>
+    
+    <button class="btn btn-primary" (click)="createOffer()">Create Session</button>
+    
+    @if (offer()) {
+        <div class="my-5 flex flex-col gap-2">
+            <h3>Step 1: Share this offer with the other peer</h3>
+            <p class="break-all whitespace-pre-wrap border border-primary p-2 rounded max-w-full overflow-wrap-anywhere">
+                {{offerInBase64()}}
+            </p>
+            <button class="btn btn-accent btn-outline" (click)="copyToClipboard(offerInBase64())">Copy Offer</button>
+        </div>
+        
+        @if (showAnswerInput()) {
+            <div class="my-5 flex flex-col gap-2">
+                <h3>Step 2: Paste the answer from the other peer</h3>
+                <input type="text" [(ngModel)]="answerString" placeholder="Paste answer here" class="input input-bordered w-full max-w-xs"/>
+                <button (click)="applyAnswer()" class="btn btn-primary">Apply Answer</button>
+            </div>
+        }
+        
+        
+        @if (connectionState() === 'connected') {
+            <app-shared-editor />
+        }
+    }
+</div>
