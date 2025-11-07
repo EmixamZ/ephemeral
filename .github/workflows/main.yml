@@ -20,7 +20,7 @@ jobs:
       run: npm ci
 
     - name: Build
-      run: npm run build -- --configuration production --base-href /ephemeral/
+      run: npm run build -- --configuration production --base-href https://EmixamZ.github.io/ephemeral/
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
